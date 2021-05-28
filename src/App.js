@@ -15,35 +15,6 @@ const App = () => {
     rowKey: null
   })
 
-  let entry1 = {
-    "name": 'name1',
-    "type": 'type1',
-    "color": '#f90b0b',
-  };
-  let entry2 = {
-    "name": 'name2',
-    "type": 'type2',
-    "color": '#0a5c8f',
-  };
-  let entry3 = {
-    "name": 'name3',
-    "type": 'type3',
-    "color": '#8f5b5b',
-  };
-  let entry4 = {
-    "name": 'name4',
-    "type": 'type4',
-    "color": '#d0b83e',
-  };
-
-  let entries = [];
-  entries.push(entry1);
-  entries.push(entry2);
-  entries.push(entry3);
-  entries.push(entry4);
-
-  localStorage.setItem("allEntries", JSON.stringify(entries))
-
   const addEntry = () => {
     
     allItems.push({
