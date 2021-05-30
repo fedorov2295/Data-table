@@ -14,15 +14,19 @@ const App = () => {
     status: false,
     rowKey: null
   })
+  const [onEditRowMode, setOnEditRowMode] = useState({
+    status: false,
+    rowKey: null
+  })
 
   const addEntry = () => {
-    
-    allItems.push({
+    const newItems = JSON.parse(localStorage.getItem("allEntries"))
+    newItems.push({
       "name": inputName,
       "type": inputType,
       "color": inputColor,
     });
-    localStorage.setItem("allEntries", JSON.stringify(allItems));
+    localStorage.setItem("allEntries", JSON.stringify(newItems));
     setItems(JSON.parse(localStorage.getItem("allEntries")));
     setInputName('');
     setInputType('');
@@ -30,8 +34,9 @@ const App = () => {
   }
 
   const onClickDeleteButton = (event) => {
-    allItems.splice(event.target.closest('TR').id, 1)
-    localStorage.setItem("allEntries", JSON.stringify(allItems))
+    const newItems = JSON.parse(localStorage.getItem("allEntries"))
+    newItems.splice(event.target.closest('TR').id, 1)
+    localStorage.setItem("allEntries", JSON.stringify(newItems))
     setItems(JSON.parse(localStorage.getItem("allEntries")))
   }
 
@@ -43,6 +48,13 @@ const App = () => {
     setName(currentName);
     setColor(currentColor);
   };
+  const onClickEditRowButton = (id) => {
+    setOnEditRowMode({
+      status: true,
+      rowKey: id
+    });
+
+  };
 
   const onSave = (index) => {
     allItems[index] = {
@@ -50,8 +62,9 @@ const App = () => {
       "type": type,
       "color": color,
     }
-    localStorage.setItem("allEntries", JSON.stringify(allItems))
-    setItems(JSON.parse(localStorage.getItem("allEntries")))
+    localStorage.setItem("allEntries", JSON.stringify(allItems));
+    setItems(JSON.parse(localStorage.getItem("allEntries")));
+
     setOnEditMode({
       status: false,
       rowKey: null
@@ -61,15 +74,31 @@ const App = () => {
     setColor('');
   }
 
+  const onChangeRowHandler = (from, to) => {
+    // allItems.splice(to, 0, allItems.splice(from, 1)[0]);
+    const rowToMove = allItems[from];
+    allItems.splice(from, 1);
+    allItems.splice(to, 0, rowToMove)
+  }
+
+  const onSaveRowHandler = () => {
+    localStorage.setItem("allEntries", JSON.stringify(allItems));
+    setItems(JSON.parse(localStorage.getItem("allEntries")));
+    setOnEditRowMode({
+      status: false,
+      rowKey: null
+    })
+  }
+
   return (
     <div className={classes.App}>
       <table className={classes.table}>
-        <thead>
-          <tr className={classes.tableHead}>
+        <thead className={classes.tableHead}>
+          <tr>
             <th className={classes.rowNumber}></th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Color</th>
+            <th className={classes.rowName}>Name</th>
+            <th className={classes.rowNType}>Type</th>
+            <th className={classes.rowNColor}>Color</th>
             <th className={classes.rowAction}>Action</th>
           </tr>
         </thead>
@@ -79,7 +108,23 @@ const App = () => {
 
               <tr className={classes.data} id={index} key={index}>
                 <td>
-                  {index + 1}
+                  {
+                    onEditRowMode.status && onEditRowMode.rowKey === index ? (
+                      <div className={classes.rows}>
+                        <input
+                          autoFocus
+                          onChange={(event) => onChangeRowHandler(index, event.target.value - 1)}
+                        />
+                        <span onClick={() => onSaveRowHandler()}></span>
+                      </div>
+                    ) : (
+                      <div className={classes.rows}>
+                        {index + 1}
+                        <div className={classes.rowEdit}
+                          onClick={() => onClickEditRowButton(index)}></div>
+                      </div>
+                    )
+                  }
                 </td>
                 <td>
                   {
@@ -123,9 +168,11 @@ const App = () => {
                 {
                   onEditMode.status && onEditMode.rowKey === index ?
                     (
-                      <ActionButtons
-                      elementType='save' 
-                      saveItem={() => onSave(index, entry)}/>
+                      <td>
+                        <ActionButtons
+                          elementType='save'
+                          saveItem={() => onSave(index, entry)} />
+                      </td>
                     ) : (
                       <td>
                         <ActionButtons
@@ -143,15 +190,15 @@ const App = () => {
             <td></td>
             <td>
               <input
-              value={inputName}
+                value={inputName}
                 onChange={event => setInputName(event.target.value)}
                 placeholder='Enter name' />
             </td>
             <td>
               <select
-              value={inputType}
+                value={inputType}
                 onChange={event => setInputType(event.target.value)}>
-                  <option></option>
+                <option></option>
                 <option>Main</option>
                 <option>Side</option>
                 <option>Lower</option>
@@ -159,7 +206,7 @@ const App = () => {
             </td>
             <td>
               <input
-              value={inputColor}
+                value={inputColor}
                 type='color'
                 onChange={event => setInputColor(event.target.value)} />
             </td>
@@ -167,7 +214,7 @@ const App = () => {
           </tr>
         </tbody>
       </table>
-          <ActionButtons elementType='add' addItem={addEntry}>Add Item</ActionButtons>
+      <ActionButtons elementType='add' addItem={addEntry}>Add Item</ActionButtons>
     </div>
   );
 }
