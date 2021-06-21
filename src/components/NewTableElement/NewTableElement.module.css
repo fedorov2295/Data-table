@@ -1,0 +1,9 @@
+.data input {
+  width: 95%;
+  text-align: center;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 2px solid #009879;
+  transition: 0.3s ease-in;
+}

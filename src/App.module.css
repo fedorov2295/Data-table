@@ -13,61 +13,34 @@
   min-width: 400px;
 }
 
-.tableHead {
-  background-color: burlywood;
-}
-
-.tableHead th {
-  border: 2px solid black;
-}
-.tableHead tr {
-  background-color: #009879;
-  color: #ffffff;
-  font-weight: bold;
-}
-
 .table th,
 .table td {
   padding: 12px 15px;
 }
 
-.table tbody tr{
-  border-bottom: 1px solid #dddddd
+.table tbody tr {
+  border-bottom: 1px solid #dddddd;
 }
 
-.table tbody tr:nth-of-type(even){
+.table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
 
-.table tbody tr:last-of-type{
+.table tbody tr:last-of-type {
   border-bottom: 2px solid #009879;
 }
 
-.rows{
+.rows {
   display: flex;
   justify-content: center;
   margin: 0 -10px;
 }
 
-.rows span{
-  margin-left: 5px;
-  display: inline-block;
-  transform: rotate(45deg);
-  height: 18px;
-  width: 8px;
-  border-bottom: 7px solid #858484;
-  border-right: 7px solid #858484;
-}
-.rows span:hover{
-  cursor: pointer;
-  border-right: 7px solid #78b13f;
-  border-bottom: 7px solid #78b13f
-}
-.rows input{
+.rows input {
   z-index: 100;
 }
 
-.data input{
+.data input {
   width: 95%;
   text-align: center;
   border: none;
@@ -75,23 +48,6 @@
   background: none;
   border-bottom: 2px solid #009879;
   transition: 0.3s ease-in;
-}
-
-.rowNumber{
-  width: 25px;
-}
-.rowAction{
-  width: 150px;
-}
-
-.rowEdit:after {
-  content: '\2807';
-  font-size: 1.5em;
-  color: #858484
-}
-
-.rowEdit:hover::after{
-  color: black
 }
 
 tr {

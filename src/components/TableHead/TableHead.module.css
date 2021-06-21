@@ -1,0 +1,19 @@
+.tableHead {
+  background-color: burlywood;
+}
+
+.tableHead th {
+  border: 2px solid black;
+}
+.tableHead tr {
+  background-color: #009879;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.rowNumber {
+  width: 25px;
+}
+.rowAction {
+  width: 150px;
+}

@@ -1,0 +1,28 @@
+.rowEdit:after {
+  content: '\2807';
+  font-size: 1.5em;
+  color: #858484;
+}
+
+.rowEdit:hover::after {
+  color: black;
+}
+.rows {
+  display: flex;
+  justify-content: center;
+  margin: 0 -10px;
+}
+.rows span {
+  margin-left: 5px;
+  display: inline-block;
+  transform: rotate(45deg);
+  height: 18px;
+  width: 8px;
+  border-bottom: 7px solid #858484;
+  border-right: 7px solid #858484;
+}
+.rows span:hover {
+  cursor: pointer;
+  border-right: 7px solid #78b13f;
+  border-bottom: 7px solid #78b13f;
+}
