@@ -6,6 +6,15 @@ import TableContent from './components/TableContent/TableContent';
 import TableRowNumber from './components/TableRowNumber/TableRowNumber';
 
 const App = () => {
+  const items = [
+    { name: 'Item1', type: 'Main', color: '#112233' },
+    { name: 'Item1', type: 'Main', color: '#112233' },
+  ];
+
+  if (JSON.parse(localStorage.getItem('allEntries')) === null) {
+    localStorage.setItem('allEntries', JSON.stringify(items));
+  }
+
   const [allItems, setItems] = useState(
     JSON.parse(localStorage.getItem('allEntries'))
   );

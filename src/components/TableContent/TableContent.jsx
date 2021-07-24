@@ -3,9 +3,9 @@ import EditData from '../EditData/EditData';
 import ActionButtons from '../../UI/DeleteButton/ActionButtons';
 
 const TableContent = (props) => {
-  const [name, setName] = useState('1');
-  const [type, setType] = useState('Main');
-  const [color, setColor] = useState('#112233');
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [color, setColor] = useState('');
   const [onEditMode, setOnEditMode] = useState({
     status: false,
     rowKey: null,
